@@ -1,8 +1,8 @@
 (function(){
- const S=RytmStats, Store=RytmStore, DAYS=['Mån','Tis','Ons','Tor','Fre','Lör','Sön'], MONTHS=['januari','februari','mars','april','maj','juni','juli','augusti','september','oktober','november','december'], COLORS=['#3e7c67','#ef8e62','#7c6bb0','#d2a43d','#5c8ec7','#c76677'];
+ const S=RytmStats, Store=RytmStore, DAYS=['Mån','Tis','Ons','Tor','Fre','Lör','Sön'], MONTHS=['januari','februari','mars','april','maj','juni','juli','augusti','september','oktober','november','december'], COLORS=['#5da9e9','#77c7d9','#8e83d8','#ef9f76','#7dbf91','#d982a6'];
  let data=Store.load(), view=(location.hash.slice(1)||'today'), cursor=new Date(), selectedColor=COLORS[0], pendingDelete=null, installPrompt=null;
  const $=s=>document.querySelector(s), esc=s=>String(s??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c])), fmt=d=>new Intl.DateTimeFormat('sv-SE',{day:'numeric',month:'short'}).format(d), today=()=>S.iso(new Date());
- const nav=[['today','Idag','●'],['dashboard','Översikt','◫'],['week','Vecka','▦'],['month','Månad','▦'],['habits','Vanor','✓'],['tasks','Att göra','☷']];
+ const nav=[['today','Idag','☀️'],['dashboard','Översikt','📊'],['week','Vecka','🗓️'],['month','Månad','📅'],['habits','Vanor','🌱'],['tasks','Att göra','✨']];
  function persist(message){if(!Store.save(data))toast('Kunde inte spara. Kontrollera webbläsarens lagring.');else if(message)toast(message)}
  function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(t.timer);t.timer=setTimeout(()=>t.classList.remove('show'),2400)}
  function setupNav(){document.querySelectorAll('.desktop-nav,.mobile-nav').forEach(el=>el.innerHTML=nav.map(([id,label,icon])=>`<a href="#${id}" data-view="${id}" class="${view===id?'active':''}"><i>${icon}</i><span>${label}</span></a>`).join(''))}
